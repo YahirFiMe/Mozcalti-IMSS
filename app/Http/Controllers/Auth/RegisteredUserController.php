@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\dbGob;
+use App\Models\Paciente;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -32,15 +34,30 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
+            'curp' => 'required|string|max:18|min:18|unique:'.User::class,
             'email' => 'required|string|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $data = dbGob::where('curp', $request->curp)->first();
+
+        if(!$data){
+            return redirect()->back()->withErrors(['curp' => 'Ingrese una curp valida']);
+        }
         $user = User::create([
-            'name' => $request->name,
+            'curp' => $request->curp,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+        ]);
+
+
+        Paciente::create([
+            'user_id' => $user->id,
+            'nombres' => $data->nombres,
+            'apellidos' => $data->apellidos,
+            'sexo' => $data->sexo,
+            'fechaNac' => $data->fechaNac,
+            'entidadNac' => $data->entidadNac,
         ]);
 
         event(new Registered($user));

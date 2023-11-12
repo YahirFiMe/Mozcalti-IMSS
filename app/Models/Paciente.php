@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class Paciente extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,8 +18,17 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
+        'nombre',
+        'appellido',
         'curp',
-        'email',
+        'NSS',
+        'sexo',
+        'fechaNac',
+        'lugar_nacimiento',
+        'domicilio',
+        'telefono',
+        'correo',
         'password',
     ];
 
@@ -30,6 +39,7 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'curp',
+        'NSS',
         'password',
         'remember_token',
     ];
@@ -44,11 +54,9 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function paciente(){
-        return $this->hasOne(Paciente::class);
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
-    public function especialista(){
-        return $this->hasOne(Especialista::class);
-    }
+
 }
