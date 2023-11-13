@@ -35,4 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/historial', function () {
+    return Inertia::render('Forms/Historial');
+})->name('historial');
+
 require __DIR__.'/auth.php';
