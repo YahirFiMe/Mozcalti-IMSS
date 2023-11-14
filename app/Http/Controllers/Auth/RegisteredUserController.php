@@ -12,6 +12,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -44,6 +45,7 @@ class RegisteredUserController extends Controller
         if(!$data){
             return redirect()->back()->withErrors(['curp' => 'Ingrese una curp valida']);
         }
+        Log::info($data);
         $user = User::create([
             'curp' => $request->curp,
             'email' => $request->email,

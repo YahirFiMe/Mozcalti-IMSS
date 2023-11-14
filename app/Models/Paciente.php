@@ -19,13 +19,13 @@ class Paciente extends Authenticatable
      */
     protected $fillable = [
         'user_id',
-        'nombre',
-        'appellido',
+        'nombres',
+        'apellidos',
         'curp',
         'NSS',
         'sexo',
         'fechaNac',
-        'lugar_nacimiento',
+        'entidadNac',
         'domicilio',
         'telefono',
         'correo',
