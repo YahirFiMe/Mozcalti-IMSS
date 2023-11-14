@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,6 @@ Route::get('/historial', function () {
     return Inertia::render('Forms/Historial');
 })->name('historial');
 
-require __DIR__.'/auth.php';
+Route::get('/create', [PDFController::class, 'createHistorial'])->name('historial.create');
+
+require __DIR__ . '/auth.php';
