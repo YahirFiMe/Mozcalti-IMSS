@@ -2,7 +2,8 @@ import {Link, usePage} from "@inertiajs/react";
 
 import facebook from '../../assets/png/facebook.png';
 import twitter from '../../assets/png/twitter.png';
-import GMXLogo from "@/Components/Logos/GMXLogo";
+import GMXLogo from "@/Components/Logos-Icons/GMXLogo";
+import LateralMenu from "@/Layouts/LateralMenu";
 
 
 export default function TopAndBottom({imageUrlTop, imageUrlBottom, children}) {
@@ -16,13 +17,13 @@ export default function TopAndBottom({imageUrlTop, imageUrlBottom, children}) {
                 <div className="col-6">
                     <GMXLogo/>
                 </div>
-                <div className="col-4">
+                <div className="col-4 p-0">
                     <nav>
-                        <ul className={'d-flex gap-5 justify-end text-white font-bold text-2xl'}>
+                        <ul className={'d-flex gap-4 justify-end text-white font-bold text-xl'}>
                             <li><a href='#'>Trámites</a></li>
                             {
                                 auth.user ?
-                                    (<li><Link href={route('dashboard')}> Dashboard</Link></li>)
+                                    (<li> <LateralMenu/> </li>)
                                     :
                                     (
                                         <>
@@ -42,7 +43,7 @@ export default function TopAndBottom({imageUrlTop, imageUrlBottom, children}) {
 
             {/*BottomBar*/}
             <div className="position-relative ">
-                <footer className="row bg-IMSS p-3 justify-around align-items-center m-0">
+                <footer className="row bg-IMSS p-3 justify-around align-items-center mr-0">
                     <div className="col-4">
                         <GMXLogo/>
                     </div>

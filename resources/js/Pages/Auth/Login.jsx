@@ -5,7 +5,7 @@ import PrimaryButton from '@/Components/Inputs/PrimaryButton';
 import TextInput from '@/Components/Inputs/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
 import TopAndBottom from "@/Layouts/TopAndBottom";
-import IMSSLogo from "@/Components/Logos/IMSSLogo";
+import IMSSLogo from "@/Components/Logos-Icons/IMSSLogo";
 
 import Fondo from '../../../assets/jpg/FondoLogin.jpg';
 

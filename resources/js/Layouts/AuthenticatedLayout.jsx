@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import IMSSLogo from '@/Components/Logos/IMSSLogo';
+import IMSSLogo from '@/Components/Logos-Icons/IMSSLogo';
 import Dropdown from '@/Components/Info/Dropdown';
 import NavLink from '@/Components/Links/NavLink';
 import ResponsiveNavLink from '@/Components/Links/ResponsiveNavLink';

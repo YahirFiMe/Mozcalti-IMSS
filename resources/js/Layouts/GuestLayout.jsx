@@ -1,4 +1,4 @@
-import IMSSLogo from '@/Components/Logos/IMSSLogo';
+import IMSSLogo from '@/Components/Logos-Icons/IMSSLogo';
 import { Link } from '@inertiajs/react';
 
 export default function Guest({ children }) {
