@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Paciente extends Authenticatable
+class Paciente extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -19,13 +19,13 @@ class Paciente extends Authenticatable
      */
     protected $fillable = [
         'user_id',
-        'nombre',
-        'appellido',
+        'nombres',
+        'apellidos',
         'curp',
         'NSS',
         'sexo',
         'fechaNac',
-        'lugar_nacimiento',
+        'entidadNac',
         'domicilio',
         'telefono',
         'correo',
@@ -39,7 +39,6 @@ class Paciente extends Authenticatable
      */
     protected $hidden = [
         'curp',
-        'NSS',
         'password',
         'remember_token',
     ];
@@ -54,7 +53,8 @@ class Paciente extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function user(){
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
