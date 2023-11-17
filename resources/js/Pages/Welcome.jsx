@@ -2,7 +2,7 @@ import { Link, Head } from '@inertiajs/react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     
-    const name = "Diego Antonio Angel Rodriguez"
+    const name = "Diego Antonio Angel"
     const curp = "AERD002211HGRNDGA5"
     const routeImg = "/resources/css/perfil_formulario.png"
 
