@@ -18,7 +18,7 @@ class DbGobSeeder extends Seeder
             'apellidos' => 'Figueroa',
             'sexo' => 'Hombre',
             'fechaNac' => '2000-11-12',
-            'curp' => 'FIMY030709HJCGNAH6',
+            'curp' => 'FIMY030709HJCGNHA6',
             'NSS' => '12345678901',
             'nacionalidad' => 'Mexicana',
             'entidadNac' => 'Jalisco',

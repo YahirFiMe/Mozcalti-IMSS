@@ -22,7 +22,7 @@ class Cita extends Model
 
     protected $casts = [
         'fecha' => 'date',
-        'hora' => 'time',
+        'hora' => 'datetime',
     ];
 
 

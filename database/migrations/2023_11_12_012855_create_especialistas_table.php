@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
+use App\Models\Clinica;
 
 return new class extends Migration
 {
@@ -12,7 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('especialistas', function (Blueprint $table) {
-            $table->foreignId('user_id')->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Clinica::class)->constrained();
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('especialidad');
@@ -20,7 +23,6 @@ return new class extends Migration
             $table->string('horario');
             $table->string('horaEntrada');
             $table->string('horaSalida');
-            $table->foreignId('clinica_id');
             $table->timestamps();
         });
     }

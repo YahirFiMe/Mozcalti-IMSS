@@ -30,9 +30,19 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+
+        if($request->user()){
+            $request->user()->only( 'curp', 'email', 'paciente');
+        }
+
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $request->user(),
+            ],
+            'fechaCita' =>[
+                'year' => null ?: date('Y'),
+                'month' => null ?: date('m'),
+                'day' => null,
             ],
             'ziggy' => function () use ($request) {
                 return array_merge((new Ziggy)->toArray(), [
@@ -40,5 +50,7 @@ class HandleInertiaRequests extends Middleware
                 ]);
             },
         ]);
+
+
     }
 }
