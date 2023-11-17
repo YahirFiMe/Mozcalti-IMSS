@@ -15,17 +15,12 @@ import {
 } from "date-fns/";
 
 import {useEffect, useState} from "react";
-import CuadroCalendario from "@/Components/Template/CuadroCalendario";
 import DropdownMes from "@/Components/Info/DropdownMes";
 import DropdownClinica from "@/Components/Info/DropdownClinica";
 import DropdownMedico from "@/Components/Info/DropdownMedico";
-import InputLabel from "@/Components/Inputs/InputLabel";
-import TextInput from "@/Components/Inputs/TextInput";
-import PrimaryButton from "@/Components/Inputs/PrimaryButton";
-import {utcToZonedTime, zonedTimeToUtc} from "date-fns-tz";
-import {eachHourOfInterval, isEqual, isSameDay} from "date-fns";
+import {addDays, eachHourOfInterval, isEqual, isSameDay} from "date-fns";
 import HourInput from "@/Components/Inputs/HourInput";
-import {jaHira} from "date-fns/locale";
+
 
 
 export default function AgendarCita() {
@@ -40,7 +35,7 @@ export default function AgendarCita() {
     const [arrayDias, setArrayDias] = useState([])
 
     //Estados de la fecha
-    const [fechaSelected, setFechaSelected] = useState(new Date(today.getFullYear(), today.getMonth(), today.getDate()))
+    const [fechaSelected, setFechaSelected] = useState(addDays(today, 1))
     const [hours, setHours] = useState([])
 
     //Estados de la clinica
@@ -166,6 +161,7 @@ export default function AgendarCita() {
         interval()
         arrayDiasF()
         calendarDisable()
+        console.log(fechaSelected)
     }, [fechaSelected, clinicaSelected, medicoSelected])
 
 

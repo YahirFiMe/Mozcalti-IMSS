@@ -40,14 +40,13 @@ export default function Dashboard({auth}) {
                 <div className="col-auto d-flex flex-col justify-center p-0 text-black">
                     <p className={'font-extrabold text-3xl mb-2'}>{auth.user.paciente.nombres} {auth.user.paciente.apellidos}</p>
                     <p className={' text-xl mb-2'}> {auth.user.curp}</p>
-                    <button className={'btn btn-success bg-IMSS border-0'}>Realizar examen clinico</button>
+                    <button className={'btn btn-success bg-IMSS border-0'}> <Link href='historial'>Realizar examen clinico</Link> </button>
                 </div>
             </div>
 
             <div className="row mr-0 mt-3 mb-3 justify-around d-flex h-96 ">
                 <div
-                    className={"col-6 border rounded-3 h-full bg-gray-200 d-flex  justify-center " +
-                        "align-items-center cursor-pointer position-relative"}
+                    className={"col-6 border rounded-3 h-full bg-gray-200 d-flex  justify-center align-items-center position-relative flex-col" + (Citas.length === 0 && 'cursor-pointer')}
                 >
                     {
                         Citas.length === 0 ?
@@ -65,7 +64,7 @@ export default function Dashboard({auth}) {
                             )
                             :
                             (
-                                <div className={'grid gap-2 grid-cols-2 w-full'}>
+                                <div className={'grid gap-2 grid-cols-3 w-full'}>
                                     {
                                         Citas.map((cita) => (
                                             <CitaCard cita={cita} key={cita.id}/>

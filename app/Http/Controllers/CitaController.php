@@ -43,6 +43,7 @@ class CitaController extends Controller
     public function indexUser($id)
     {
         $citas = Cita::join('especialistas','especialistas.user_id','=','citas.especialista_id')
+        ->join('clinicas', 'clinicas.id', '=', 'citas.clinica_id')
         ->where('paciente_id',$id)
         ->get();
 

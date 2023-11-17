@@ -1,5 +1,5 @@
 import ProfileIconCircle from "@/Components/Logos-Icons/ProfileIconCircle";
-import {usePage} from "@inertiajs/react";
+import {Link, usePage} from "@inertiajs/react";
 import CloseIcon from "@/Components/Logos-Icons/CloseIcon";
 import HashIcon from "@/Components/Logos-Icons/HashIcon";
 import NavItemProfile from "@/Components/Info/NavItemProfile";
@@ -66,7 +66,7 @@ export default function LateralMenu({className = '', ...props}) {
                     </div>
                     <button
                         className={'btn btn-lg btn-success border-0 bg-IMSS text-white position-absolute bottom-10 left-7'}>
-                        Agendar cita
+                        <Link href="/AgendarCita" >Agendar cita</Link>
                     </button>
                 </div>
             </div>

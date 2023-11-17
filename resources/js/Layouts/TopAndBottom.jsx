@@ -23,7 +23,13 @@ export default function TopAndBottom({imageUrlTop, imageUrlBottom, children}) {
                             <li><a href='#'>Trámites</a></li>
                             {
                                 auth.user ?
-                                    (<li> <LateralMenu/> </li>)
+                                    (
+                                    <>
+                                        <li> <Link href="/dashboard">Inicio</Link> </li>
+                                        <li> <LateralMenu/> </li>
+                                    </>
+                                    )
+                                    
                                     :
                                     (
                                         <>
