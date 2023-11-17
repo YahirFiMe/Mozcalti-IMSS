@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('numClinica');
             $table->string('direccion');
+            $table->timestamps();
         });
     }
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import IMSSLogo from '@/Components/Logos-Icons/IMSSLogo';
-import Dropdown from '@/Components/Info/Dropdown';
+import DropdownClinica from '@/Components/Info/DropdownClinica';
 import NavLink from '@/Components/Links/NavLink';
 import ResponsiveNavLink from '@/Components/Links/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
@@ -29,8 +29,8 @@ export default function Authenticated({ user, header, children }) {
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
+                                <DropdownClinica>
+                                    <DropdownClinica.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
@@ -52,15 +52,15 @@ export default function Authenticated({ user, header, children }) {
                                                 </svg>
                                             </button>
                                         </span>
-                                    </Dropdown.Trigger>
+                                    </DropdownClinica.Trigger>
 
-                                    <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                    <DropdownClinica.Content>
+                                        <DropdownClinica.Link href={route('profile.edit')}>Profile</DropdownClinica.Link>
+                                        <DropdownClinica.Link href={route('logout')} method="post" as="button">
                                             Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
+                                        </DropdownClinica.Link>
+                                    </DropdownClinica.Content>
+                                </DropdownClinica>
                             </div>
                         </div>
 

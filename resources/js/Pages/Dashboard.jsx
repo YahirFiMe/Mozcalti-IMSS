@@ -1,15 +1,33 @@
 import {Head, Link} from '@inertiajs/react';
 import TopAndBottom from "@/Layouts/TopAndBottom";
 import ProfileIcon from "@/Components/Logos-Icons/ProfileIcon";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import CalendarIcon from "@/Components/Logos-Icons/CalendarIcon";
 import PdfIcon from "@/Components/Logos-Icons/PdfIcon";
+import {getDate} from "date-fns";
+import CitaCard from "@/Components/Template/CitaCard";
 
 export default function Dashboard({auth}) {
 
+
+    const [Citas, setCitas] = useState([])
+
+    const getCitas = () => {
+
+        axios.get(`/CitasUser/${auth.user.id}`)
+            .then((response) => {
+                setCitas(response.data.citas)
+            }).catch((error) => {
+            console.log(error)
+        })
+    }
+
     useEffect(() => {
+        getCitas()
+        console.log(Citas)
 
     }, []);
+
 
     return (
         <TopAndBottom>
@@ -28,15 +46,34 @@ export default function Dashboard({auth}) {
 
             <div className="row mr-0 mt-3 mb-3 justify-around d-flex h-96 ">
                 <div
-                    className={"col-6 border rounded-3 h-full bg-gray-200 d-flex flex-col justify-center align-items-center cursor-pointer"}
-                    onClick={() => console.log('click')}>
-
-                    <CalendarIcon/>
-                    <div className="col-4 mt-3 ">
-                        <p className={'text-center text-gray-400 text-lg font-light '}>
-                            Parece que no tienes ninguna cita programada. Haz click aquí para programar una cita.
-                        </p>
-                    </div>
+                    className={"col-6 border rounded-3 h-full bg-gray-200 d-flex  justify-center " +
+                        "align-items-center cursor-pointer position-relative"}
+                >
+                    {
+                        Citas.length === 0 ?
+                            (
+                            <>
+                                <Link href={route('calendario')} className={'h-full w-full position-absolute'}/>
+                                <CalendarIcon/>
+                                <div className="col-4 mt-3 ">
+                                    <p className={'text-center text-gray-400 text-lg font-light '}>
+                                        Parece que no tienes ninguna cita programada. Haz click aquí para programar una
+                                        cita.
+                                    </p>
+                                </div>
+                            </>
+                            )
+                            :
+                            (
+                                <div className={'grid gap-2 grid-cols-2 w-full'}>
+                                    {
+                                        Citas.map((cita) => (
+                                            <CitaCard cita={cita} key={cita.id}/>
+                                        ))
+                                    }
+                                </div>
+                            )
+                    }
                 </div>
                 <div
                     className="col-5 border rounded-3 h-full bg-gray-200 d-flex flex-col justify-center align-items-center cursor-pointer"

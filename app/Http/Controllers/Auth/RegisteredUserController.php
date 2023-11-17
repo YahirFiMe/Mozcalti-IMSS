@@ -57,6 +57,7 @@ class RegisteredUserController extends Controller
             'user_id' => $user->id,
             'nombres' => $data->nombres,
             'apellidos' => $data->apellidos,
+            'NSS' => $data->NSS,
             'sexo' => $data->sexo,
             'fechaNac' => $data->fechaNac,
             'entidadNac' => $data->entidadNac,
