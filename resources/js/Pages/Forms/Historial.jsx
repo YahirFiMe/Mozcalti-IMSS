@@ -1,12 +1,23 @@
-import Checkbox from '@/Components/Checkbox';
+import Checkbox from '@/Components/Inputs/Checkbox';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/Inputs/InputError';
+import InputLabel from '@/Components/Inputs/InputLabel';
+import PrimaryButton from '@/Components/Inputs/PrimaryButton';
+import TextInput from '@/Components/Inputs/TextInput';
 import {Head, Link, useForm} from '@inertiajs/react';
-import RadioButton from "@/Components/RadioButton";
-import SelectInput from "@/Components/SelectInput";
+import RadioButton from "@/Components/Inputs/RadioButton";
+import SelectInput from "@/Components/Inputs/SelectInput";
+import TopAndBottom from '@/Layouts/TopAndBottom';
+
+// chidos
+// import GuestLayout from '@/Layouts/GuestLayout';
+// import InputLabel from '@/Components/Inputs/InputLabel';
+// import PrimaryButton from '@/Components/Inputs/PrimaryButton';
+// import TextInput from '@/Components/Inputs/TextInput';
+// import {Head, useForm} from '@inertiajs/react';
+// import RadioButton from "@/Components/Inputs/RadioButton";
+// import SelectInput from "@/Components/Inputs/SelectInput";
+// import TopAndBottom from "@/Layouts/TopAndBottom";
 
 export default function Historial() {
 
@@ -65,6 +76,8 @@ export default function Historial() {
     }
 
     return (
+        <TopAndBottom>
+
         <GuestLayout>
             <Head title="Historial"/>
 
@@ -536,5 +549,6 @@ export default function Historial() {
                 </div>
             </form>
         </GuestLayout>
+        </TopAndBottom>
     );
 }

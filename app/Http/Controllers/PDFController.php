@@ -15,9 +15,17 @@ class PDFController extends Controller
 {
     public function createHistorial(ValidarHistorialRequest $request)
     {
+        // dd(auth()->user()->curp);
+
+        $paciente = Paciente::where('user_id', auth()->user()->id)->first();
+
         $data = $request->validated();
 
         $information = [
+
+            'fullname' => $paciente['nombres'] . ' ' . $paciente['apellidos'],
+            'fechaNac' => $paciente['fechaNac'],
+            'sexo' => $paciente['sexo'],
             'fecha' => date('d-m-Y'),
             'diabetes' => $request->Diabetes,
             'cancer' => $request->Cancer,
@@ -73,7 +81,7 @@ class PDFController extends Controller
         $dompdf = new Dompdf($options);
 
         // histiral path
-        $path = public_path('historial/');
+        $path = 'C:\xampp\htdocs\Mozcalti-IMSS\public\historiales/';
         $nombreArchivo = time() . ".pdf";
         //Renderiza el archivo primero
         $html = view('historial', compact('information'))->render();

@@ -119,18 +119,15 @@
                 <table>
                     <tr>
                         <th>
-                            <p>Nombre completo:</p>
+                            <p>Nombre completo:  {{ $information['fullname'] }}</p>
                         </th>
                         <th>
-                            <p>Sexo: </p>
+                            <p>Sexo:  {{ $information['sexo'] }} </p>
                         </th>
                     </tr>
                     <tr>
                         <th>
-                            <p>Fecha de nacimiento: </p>
-                        </th>
-                        <th>
-                            <p>Edad:</p>
+                            <p>Fecha de nacimiento:  {{ $information['fechaNac'] }}</p>
                         </th>
                     </tr>
                     <tr>
