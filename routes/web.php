@@ -3,6 +3,7 @@
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\ClinicaController;
 use App\Http\Controllers\EspecialistaController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -55,8 +56,11 @@ Route::resources([
     'Citas' => CitaController::class,
 ]);
 
+
+
 Route::get('/CitasUser/{id}', [CitaController::class, 'indexUser']);
 
+Route::get('/create/', [PDFController::class, 'createHistorial'])->name('historial.create');
 
 
 require __DIR__.'/auth.php';
