@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import IMSSLogo from '@/Components/Logos-Icons/IMSSLogo';
-import DropdownClinica from '@/Components/Info/DropdownClinica';
-import NavLink from '@/Components/Links/NavLink';
-import ResponsiveNavLink from '@/Components/Links/ResponsiveNavLink';
+import ApplicationLogo from '@/Components/ApplicationLogo';
+import Dropdown from '@/Components/Dropdown';
+import NavLink from '@/Components/NavLink';
+import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 
 export default function Authenticated({ user, header, children }) {
@@ -16,7 +16,7 @@ export default function Authenticated({ user, header, children }) {
                         <div className="flex">
                             <div className="shrink-0 flex items-center">
                                 <Link href="/">
-                                    <IMSSLogo className="block h-9 w-auto fill-current text-gray-800" />
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                 </Link>
                             </div>
 
@@ -29,8 +29,8 @@ export default function Authenticated({ user, header, children }) {
 
                         <div className="hidden sm:flex sm:items-center sm:ml-6">
                             <div className="ml-3 relative">
-                                <DropdownClinica>
-                                    <DropdownClinica.Trigger>
+                                <Dropdown>
+                                    <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
@@ -52,15 +52,15 @@ export default function Authenticated({ user, header, children }) {
                                                 </svg>
                                             </button>
                                         </span>
-                                    </DropdownClinica.Trigger>
+                                    </Dropdown.Trigger>
 
-                                    <DropdownClinica.Content>
-                                        <DropdownClinica.Link href={route('profile.edit')}>Profile</DropdownClinica.Link>
-                                        <DropdownClinica.Link href={route('logout')} method="post" as="button">
+                                    <Dropdown.Content>
+                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
-                                        </DropdownClinica.Link>
-                                    </DropdownClinica.Content>
-                                </DropdownClinica>
+                                        </Dropdown.Link>
+                                    </Dropdown.Content>
+                                </Dropdown>
                             </div>
                         </div>
 

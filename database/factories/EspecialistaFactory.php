@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,14 +17,7 @@ class EspecialistaFactory extends Factory
     public function definition(): array
     {
         return [
-            'clinica_id' => 1,
-            'nombres' => $this->faker->firstName(),
-            'apellidos' => $this->faker->lastName(),
-            'especialidad' => $this->faker->jobTitle(),
-            'cedula' => $this->faker->randomNumber(8),
-            'horario' => $this->faker->time(),
-            'horaEntrada' => $this->faker->time(),
-            'horaSalida' => $this->faker->time(),
+            //
         ];
     }
 }

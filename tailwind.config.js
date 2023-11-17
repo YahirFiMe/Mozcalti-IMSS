@@ -14,9 +14,6 @@ module.exports = {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
-            colors: {
-                'IMSS':'#0d4e37',
-            }
         },
     },
 

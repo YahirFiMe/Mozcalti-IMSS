@@ -1,16 +1,14 @@
-import {useEffect} from 'react';
-import InputError from '@/Components/Inputs/InputError';
-import InputLabel from '@/Components/Inputs/InputLabel';
-import PrimaryButton from '@/Components/Inputs/PrimaryButton';
-import TextInput from '@/Components/Inputs/TextInput';
-import {Head, Link, useForm} from '@inertiajs/react';
-import TopAndBottom from "@/Layouts/TopAndBottom";
-import IMSSLogo from "@/Components/Logos-Icons/IMSSLogo";
+import { useEffect } from 'react';
+import Checkbox from '@/Components/Checkbox';
+import GuestLayout from '@/Layouts/GuestLayout';
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import { Head, Link, useForm } from '@inertiajs/react';
 
-import Fondo from '../../../assets/jpg/FondoLogin.jpg';
-
-export default function Login({status, canResetPassword}) {
-    const {data, setData, post, processing, errors, reset} = useForm({
+export default function Login({ status, canResetPassword }) {
+    const { data, setData, post, processing, errors, reset } = useForm({
         curp: '',
         password: '',
         remember: false,
@@ -29,60 +27,71 @@ export default function Login({status, canResetPassword}) {
     };
 
     return (
-        <TopAndBottom>
-            <Head title="Iniciar sesión"/>
+        <GuestLayout>
+            <Head title="Log in" />
 
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-6 p-16">
-                        <IMSSLogo/>
+            {status && <div className="mb-4 font-medium text-sm text-green-600">{status}</div>}
 
-                        <p className={'text-5xl font-bold text-IMSS mb-3 mt-3'}> Portal de citas </p>
-                        <p className={'mb-3'}>
-                            En nuestra plataforma de citas, te aseguramos que pobras solicitar y gestionar tus citas de
-                            manera segura y rápida, todo
-                            desde la comodidad de tu hogar. Este portal ha sido diseñado con el objetivo de facilitar el
-                            acceso a servicios de salud
-                            a todas las personas en México.
-                        </p>
+            <form onSubmit={submit}>
+                <div>
+                    <InputLabel htmlFor="email" value="Curp" />
 
-                        <div className="col-8">
-                            <form onSubmit={submit}>
-                                <div className="">
-                                    <InputLabel className={'font-bold text-xl ml-3'} value={'Ingresa tu Curp'}/>
+                    <TextInput
+                        id="email"
+                        type="text"
+                        name="email"
+                        value={data.curp}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        isFocused={true}
+                        onChange={(e) => setData('curp', e.target.value)}
+                    />
 
-                                    <TextInput id="Curp" name="Curp" value={data.curp} className="mt-1 block w-full"
-                                               isFocused={true} maxLength={18} placeholder={'CURP (18 caracteres)'}
-                                               autoComplete={'curp'}
-                                               onChange={(e) => setData('curp', e.target.value)} required/>
-                                    <InputError message={errors.curp} className="mt-2"/>
-                                </div>
-                                <div className="mt-4">
-                                    <InputLabel className={'font-bold text-xl ml-3'} value={'Contraseña'}/>
-
-                                    <TextInput id="password" name="password" value={data.password}
-                                               className="mt-1 block w-full"
-                                               isFocused={true} placeholder={'Ingresa tu contraseña'} type={'password'}
-                                               onChange={(e) => setData('password', e.target.value)} required/>
-                                </div>
-
-                                <PrimaryButton className={'mt-3 mb-2'} disabled={processing}>
-                                    Iniciar sesión
-                                </PrimaryButton>
-                            </form>
-
-                            <p>
-                                ¿No tienes una cuenta? <Link href={route('register')} className={'text-IMSS font-bold'}>Registrate
-                                aquí</Link>
-                            </p>
-                        </div>
-                    </div>
-                    <div className="col p-0">
-                        <img src={Fondo} className={'position-relative'}/>
-                    </div>
+                    <InputError message={errors.curp} className="mt-2" />
                 </div>
-            </div>
 
-        </TopAndBottom>
+                <div className="mt-4">
+                    <InputLabel htmlFor="password" value="Contraseña" />
+
+                    <TextInput
+                        id="password"
+                        type="password"
+                        name="password"
+                        value={data.password}
+                        className="mt-1 block w-full"
+                        autoComplete="current-password"
+                        onChange={(e) => setData('password', e.target.value)}
+                    />
+
+                    <InputError message={errors.password} className="mt-2" />
+                </div>
+
+                <div className="block mt-4">
+                    <label className="flex items-center">
+                        <Checkbox
+                            name="remember"
+                            checked={data.remember}
+                            onChange={(e) => setData('remember', e.target.checked)}
+                        />
+                        <span className="ml-2 text-sm text-gray-600">Recuerdame</span>
+                    </label>
+                </div>
+
+                <div className="flex items-center justify-end mt-4">
+                    {canResetPassword && (
+                        <Link
+                            href={route('password.request')}
+                            className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                        >
+                            ¿Olvidaste tu contraseña?
+                        </Link>
+                    )}
+
+                    <PrimaryButton className="ml-4" disabled={processing}>
+                        Iniciar sesión
+                    </PrimaryButton>
+                </div>
+            </form>
+        </GuestLayout>
     );
 }

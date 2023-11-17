@@ -17,8 +17,7 @@ class ClinicaFactory extends Factory
     public function definition(): array
     {
         return [
-            'numClinica' => $this->faker->unique()->numberBetween(1, 100),
-            'direccion' => $this->faker->address(),
+            //
         ];
     }
 }
