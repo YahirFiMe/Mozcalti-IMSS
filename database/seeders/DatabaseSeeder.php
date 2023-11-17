@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Especialista;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +23,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call([ // Llamamos a los seeders
             DbGobSeeder::class,
+            ClinicaSeeder::class,
         ]);
+
+        User::factory()->has(Especialista::factory()->count(1))->count(5)->create();
+
     }
 }
