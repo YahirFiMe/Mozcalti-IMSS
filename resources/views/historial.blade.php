@@ -98,7 +98,8 @@
 <body>
 
     <div class="navheader">
-        <img src="{{ public_path('storage/imsslogo.png') }}" height="80px">
+        <img src="https://res.cloudinary.com/dowcuhzqe/image/upload/v1700205348/utils/zinwek9v5qsvgre89wuw"
+            height="80px">
         <p class="logoText">INSTITUTO MEXICANO DEL SEGURO SOCIAL</p>
         <p class="logoText" style="font-size: 17px;">SEGURIDAD Y SOLIDARIDAD SOCIAL</p>
     </div>
@@ -307,7 +308,8 @@
         <div style="page-break-after:always;"></div>
 
         <div class="navheader">
-            <img src="{{ public_path('storage/imsslogo.png') }}" height="80px">
+            <img src="https://res.cloudinary.com/dowcuhzqe/image/upload/v1700205348/utils/zinwek9v5qsvgre89wuw"
+                height="80px">
             <p class="logoText">INSTITUTO MEXICANO DEL SEGURO SOCIAL</p>
             <p class="logoText" style="font-size: 17px;">SEGURIDAD Y SOLIDARIDAD SOCIAL</p>
         </div>

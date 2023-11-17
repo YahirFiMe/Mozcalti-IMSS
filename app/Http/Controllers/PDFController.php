@@ -4,80 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use App\Http\Requests\ValidarHistorialRequest;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use App\Models\Paciente;
 use Validator;
 
 class PDFController extends Controller
 {
-    public function createHistorial(Request $request)
+    public function createHistorial(ValidarHistorialRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            // Seccion uno
-            'Diabetes' => 'required|in:Si,No',
-            'Cancer' => 'required|in:Si,No',
-            'Nefropatia' => 'required|in:Si,No',
-            'Hipertension' => 'required|in:Si,No',
-            'Cardiopatia' => 'required|in:Si,No',
-            'Malformaciones' => 'required|in:Si,No',
-            'Otras' => 'nullable|string',
-
-            // Seccion 2
-            'Tabaquismo' => 'required|in:Si,No',
-            'CigarrillosDia' => 'nullable|string',
-            'CigarrillosYear' => 'nullable|string',
-            'Exfumador' => 'nullable|in:Si,No',
-            'Alcoholismo' => 'required|in:Si,No',
-            'mlAlcoholismo' => 'nullable|string',
-            'AlcoholismoYear' => 'nullable|string',
-            'Exalcoholico' => 'nullable|in:Si,No',
-            'Alergias' => 'required|in:Si,No',
-            'AlergiasInfo' => 'nullable|string',
-
-            // Seccion 3
-            'Infancia' => 'nullable|string',
-            'InfanciaSecuelas' => 'nullable|string',
-            'Hospitalizaciones' => 'required|in:Si,No',
-            'HospitalizacionesInfo' => 'nullable|string',
-            'Quirurgicos' => 'required|in:Si,No',
-            'QuirurgicosInfo' => 'nullable|string',
-            'Transfusiones' => 'required|in:Si,No',
-            'TransfusionesInfo' => 'nullable|string',
-            'Fracturas' => 'required|in:Si,No',
-            'FracturasInfo' => 'nullable|string',
-            'Traumatismo' => 'required|in:Si,No',
-            'TraumatismoInfo' => 'nullable|string',
-            'Padecimiento' => 'required|in:Si,No',
-            'PadecimientoInfo' => 'nullable|string',
-
-            // Seccion 4
-            'Motivo' => 'required|string',
-
-            // Seccion 5
-            'Evolucion' => 'nullable|string',
-
-            // Seccion 6
-            'Cardiovascular' => 'required|in:Si,No',
-            'Digestivo' => 'required|in:Si,No',
-            'Endocrino' => 'required|in:Si,No',
-            'Muscular' => 'required|in:Si,No',
-            'Urinario' => 'required|in:Si,No',
-            'Hematopoyetico' => 'required|in:Si,No',
-            'Piel' => 'required|in:Si,No',
-            'Nervioso' => 'required|in:Si,No',
-
-            // seccion 7
-            'Medicacion' => 'required|in:Si,No',
-            'MedicacionInfo' => 'nullable|string',
-
-            // Seccion 8
-            'Comentarios' => 'nullable|string',
-        ]);
-
-        if ($validator->fails()) {
-            dd($validator);
-            return redirect('test')
-                ->withErrors($validator)
-                ->withInput();
-        }
+        $data = $request->validated();
 
         $information = [
             'fecha' => date('d-m-Y'),
@@ -128,9 +66,41 @@ class PDFController extends Controller
             'comentarios' => $request->Comentarios,
         ];
 
+        // Opciones de configuración de Dompdf
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isRemoteEnabled', true);
+        $dompdf = new Dompdf($options);
 
-        $pdf = Pdf::loadView('historial', compact('information'));
-        return $pdf->stream();
+        // histiral path
+        $path = public_path('historial/');
+        $nombreArchivo = time() . ".pdf";
+        //Renderiza el archivo primero
+        $html = view('historial', compact('information'))->render();
+        $dompdf->loadHtml($html);
+        $dompdf->render();
 
+        //Guardalo en una variable
+        $output = $dompdf->output();
+
+        file_put_contents($path . $nombreArchivo, $output);
+
+        $cloudinaryResponse = Cloudinary::upload($path . $nombreArchivo, ['folder' => 'Historiales']);
+
+        if (file_exists($path . $nombreArchivo)) {
+            unlink($path . $nombreArchivo);
+        }
+
+        $public_id = $cloudinaryResponse->getPublicId();
+        //  con este podemos descargar el pdf
+        $url = $cloudinaryResponse->getSecurePath();
+
+        // dd($url . ' ' . $public_id);
+
+        // ! Logica para asignar valores en la tabla de pacientes
+
+        return redirect($url);
     }
+
+
 }
